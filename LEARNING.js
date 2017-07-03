@@ -61,7 +61,7 @@ $.get('/dreams', function(dreams) { //if the server sends json string (array is 
 // });
     
 2. JQuery sending POST request
-$('form').submit(function(event) {  //notice this form doesn't have to have name attribute
+$('form').submit(function(event) { //or $('form').on("submit", function(event) //notice this form doesn't have to have name attribute 
   event.preventDefault(); //same effect as hijacking the form, not submitting the form which is form's default behavior
   var dream = $('input').val();
   $.post('/dreams?' + $.param({dream: dream}), {dream: dream}, function(data) {  //$.param({dream: dream}) will add query string to the url  // {dream: dream} will send form data // in this case, both query string and request body form data will have dream: asd
