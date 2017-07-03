@@ -20,13 +20,13 @@
 
         window.onload=function()
         {
-            document.addEventListener("deviceready", init, false); //this is for mobile
-            //init();  //this is for web
+            //document.addEventListener("deviceready", init, false); //this is for mobile
+            init();  //this is for web
         }
 
         function init()
         {
-            document.getElementById('btnGetJoke').addEventListener('click', getJoke, false);
+            document.getElementById('btnGetJoke').addEventListener('click', getJoke, false); //without specifying false, by default will be false, means bubbling phase, if specifically set it to true, will be captureing phase
             xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = receiveJoke;
         }
@@ -37,7 +37,7 @@
             url += document.getElementById('first').value;
             url += "&lastName=";
             url += document.getElementById('last').value;
-            xmlhttp.open('GET', url, false);
+            xmlhttp.open('GET', url, false); //false means syncronous, true means asyncronous
             xmlhttp.send();
         }
 
@@ -66,3 +66,57 @@
         </div>
     </body>
 </html>
+
+<!--this is parsing XML -->
+<!--script>
+
+    var xmlhttp;
+
+    window.onload = function()
+    {
+        //document.addEventListener('deviceready', init);
+        init();
+    }
+
+    function init()
+    {
+        document.getElementById('btnGetForecast').addEventListener('click', getData);
+    }
+
+    function getData()
+    {
+        xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange= processResult;
+        var url = "http://wsf.cdyne.com/WeatherWS/Weather.asmx/GetCityWeatherByZIP?ZIP=";
+        url += document.getElementById('zip').value;             
+        xmlhttp.open("GET", url, false);
+        xmlhttp.send();
+    }
+
+    function processResult()
+    {
+        if(xmlhttp.readyState==4 && xmlhttp.status == 200)
+        {
+
+            var theXML = xmlhttp.responseXML.documentElement;
+            var city = theXML.getElementsByTagName('City')[0].firstChild.nodeValue;
+            var state = theXML.getElementsByTagName('State')[0].firstChild.nodeValue;
+            var temperature = theXML.getElementsByTagName('Temperature')[0].firstChild.nodeValue;
+            var relativeHumidity = theXML.getElementsByTagName('RelativeHumidity')[0].firstChild.nodeValue;
+            var description = theXML.getElementsByTagName('Description')[0].firstChild.nodeValue;
+            var wind = theXML.getElementsByTagName('Wind')[0].firstChild.nodeValue;
+
+            var output = "Weather For: ";
+            output += city +", " + state;
+            output += "<br/>Temperature: " + temperature;
+            output += "<br/>Humidity: " + relativeHumidity;
+            output += "<br/>Description: " + description;
+            output += "<br/>Wind: " + wind;
+            document.getElementById('result').innerHTML = output;
+
+
+        }
+    }
+
+
+</script-->
