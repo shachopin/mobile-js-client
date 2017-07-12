@@ -20,8 +20,8 @@
 
         window.onload=function()
         {
-            document.addEventListener("deviceready", init, false); //this is for mobile
-            //init();  //this is for web
+            //document.addEventListener("deviceready", init, false); //this is for mobile
+            init();  //this is for web
         }
 
         function init()
@@ -57,7 +57,7 @@
         <div id="container">
           <h2>Joke Generator</h2>
           <label for="first">First</label>
-          <input type="text" id="first" />
+          <input type="text" id="first" required/> <!--there is no form submission, the the html validation won't kick in, api works with ?firstName=&lastName= -->
           <label for="last">Last</label>
           <input type="text" id="last" />
           <button id="btnGetJoke">Get Joke</button>
