@@ -1,5 +1,13 @@
 Send Request
 1. jquery sending GET request:
+https://stackoverflow.com/questions/1478295/what-does-async-false-do-in-jquery-ajax
+Does it have something to do with preventing other events on the page from firing?
+Yes.
+
+Setting async to false in $.ajax means that the statement you are calling has to complete before the next statement in your function can be called. 
+If you set async: true then that statement will begin it's execution and the next statement will be called regardless of whether the async statement has completed yet.
+by default it's set to true
+
 $.getJSON( "test.js", { name: "John", time: "2pm" } ) //will be query params in URL
   .done(function( json ) {
     console.log( "JSON Data: " + json.users[ 3 ].name ); //successful requst
